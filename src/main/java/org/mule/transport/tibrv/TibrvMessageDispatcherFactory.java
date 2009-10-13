@@ -1,13 +1,13 @@
 // 	TibrvMessageDispatcherFactory.java
 
 // 	Ross Paul, ross.paul@mlb.com, 22 Jun 2006
-// 	Time-stamp: <2007-06-26 17:02:09 rpaul>
-package org.mule.providers.tibrv;
+// 	Time-stamp: <2009-10-12 16:27:18 rpaul>
+package org.mule.transport.tibrv;
 
-import org.mule.umo.UMOException;
-import org.mule.umo.endpoint.UMOImmutableEndpoint;
-import org.mule.umo.provider.UMOMessageDispatcher;
-import org.mule.providers.AbstractMessageDispatcherFactory;
+import org.mule.api.MuleException;
+import org.mule.api.endpoint.OutboundEndpoint;
+import org.mule.api.transport.MessageDispatcher;
+import org.mule.transport.AbstractMessageDispatcherFactory;
 
 /**
  * Simply spins out a dispatcher
@@ -19,8 +19,8 @@ public class TibrvMessageDispatcherFactory
     extends AbstractMessageDispatcherFactory
 {
     
-    public UMOMessageDispatcher create( UMOImmutableEndpoint endpoint ) 
-        throws UMOException
+    public MessageDispatcher create( OutboundEndpoint endpoint ) 
+        throws MuleException
     {
         return new TibrvMessageDispatcher( endpoint );
     }

@@ -1,8 +1,8 @@
 // 	ObjectToTibrvMsg.java
 
-// 	Ross Paul, ross.paul@mlb.com, 13 Jul 2006
-// 	Time-stamp: <2007-06-26 17:25:33 rpaul>
-package org.mule.providers.tibrv.transformers;
+// 	Ross Paul, rossapaul@gmail.com, 13 Jul 2006
+// 	Time-stamp: <2009-10-12 17:47:45 rpaul>
+package org.mule.transport.tibrv.transformer;
 
 import java.util.*;
 import java.io.*;
@@ -11,10 +11,12 @@ import com.tibco.tibrv.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.mule.transformers.AbstractTransformer;
-import org.mule.umo.transformer.TransformerException;
+import org.mule.transport.tibrv.TibrvConnector;
 
-import org.mule.providers.tibrv.TibrvConnector;
+import org.mule.transformer.AbstractMessageAwareTransformer;
+import org.mule.api.transformer.TransformerException;
+import org.mule.api.MuleMessage;
+
 
 /**
  * If the object is a map, the transformer will create a TibrvMsg which 
@@ -26,14 +28,16 @@ import org.mule.providers.tibrv.TibrvConnector;
  * @author <a href="mailto:rossapaul@gmail.com">Ross Paul</a>
  * @version $Revision: 3 $
  */ 
-public class ObjectToTibrvMsg extends AbstractTransformer
+public class ObjectToTibrvMsg extends AbstractMessageAwareTransformer
 {
     private static transient Log logger = 
         LogFactory.getLog( ObjectToTibrvMsg.class );
 
-    public Object doTransform( Object src, String encoding ) 
+    public Object transform( MuleMessage message, String encoding ) 
         throws TransformerException
     {
+        Object src = message.getPayload();
+
         if( src instanceof TibrvMsg )
             return src;
 

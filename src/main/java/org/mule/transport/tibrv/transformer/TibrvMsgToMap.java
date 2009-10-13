@@ -1,15 +1,17 @@
 // 	TibrvMessageToMap.java
 
-// 	Ross Paul, ross.paul@mlb.com, 12 Jul 2006
-// 	Time-stamp: <2007-06-26 17:17:51 rpaul>
-package org.mule.providers.tibrv.transformers;
-
-import org.mule.transformers.AbstractTransformer;
-import org.mule.umo.transformer.TransformerException;
+// 	Ross Paul, rossapaul@gmail.com, 12 Jul 2006
+// 	Time-stamp: <2009-10-12 17:47:56 rpaul>
+package org.mule.transport.tibrv.transformer;
 
 import com.tibco.tibrv.*;
 import java.util.*;
 import java.io.*;
+
+import org.mule.transformer.AbstractMessageAwareTransformer;
+import org.mule.api.transformer.TransformerException;
+import org.mule.api.MuleMessage;
+
 
 /**
  * Takes in a tibrvMessage and converts it to a Map.  Additionally tibco 
@@ -18,7 +20,7 @@ import java.io.*;
  * @author <a href="mailto:rossapaul@gmail.com">Ross Paul</a>
  * @version $Revision: 1.3 $
  */
-public class TibrvMsgToMap extends AbstractTransformer
+public class TibrvMsgToMap extends AbstractMessageAwareTransformer
 {
 
     public TibrvMsgToMap()
@@ -29,12 +31,12 @@ public class TibrvMsgToMap extends AbstractTransformer
 
 	// probably want a separate transformer for messsage to object
 
-    public Object doTransform( Object src, String encoding ) 
+    public Object transform( MuleMessage message, String encoding ) 
         throws TransformerException
     {
         Map map = null;
         try{
-            map = transform( (TibrvMsg)src );
+            map = transform( (TibrvMsg)message.getPayload() );
         }catch( Exception e ){ throw new TransformerException( this, e );}
         return map;
     }

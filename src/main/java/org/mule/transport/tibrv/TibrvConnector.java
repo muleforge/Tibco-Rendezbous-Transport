@@ -1,33 +1,31 @@
 // 	TibrvConnector.java
 
-// 	Ross Paul, ross.paul@mlb.com, 21 Jun 2006
-// 	Time-stamp: <2007-06-26 16:58:10 rpaul>
-package org.mule.providers.tibrv;
+// 	Ross Paul, rossapaul@gmail.com, 21 Jun 2006
+// 	Time-stamp: <2009-10-13 12:13:16 rpaul>
+package org.mule.transport.tibrv;
 
 import com.tibco.tibrv.*;
-import org.mule.providers.*;
-import org.mule.umo.*;
-import org.mule.umo.lifecycle.LifecycleException;
-import org.mule.umo.lifecycle.InitialisationException;
-import org.mule.config.i18n.*;
+
+import org.mule.api.MuleException;
+import org.mule.api.endpoint.InboundEndpoint;
+import org.mule.api.lifecycle.InitialisationException;
+import org.mule.api.service.Service;
+import org.mule.api.transport.MessageReceiver;
+import org.mule.transport.AbstractConnector;
 
 
 /**
- * Allows mule to communicate over rendevoooooos!  Endpoint may be specified 
- * with: tibrv://subjectName.  Or to use certified messaging, specify endpoints
- * with: tibrv://subjectName?cmname=yourCMName.
- * The connector is configured by specifiying the service, network, &&|| daemon
- * as properties.  The Receiver are set up to act as distributed queue receivers
- * whose default weights etc should be set here.
+ * Allows mule to communicate over rendevoooooos!  Now mule 2.2.1 friendly
  *
  * @author <a href="mailto:rossapaul@gmail.com">Ross Paul</a>
  * @version $Revision: 3 $
  */
 public class TibrvConnector extends AbstractConnector
 {
+    public static final String TIBRV = "tibrv";
     public static final String CONTENT_FIELD = "content";
 
-    //tibco connectino params
+    //tibco connection params
     private String service;
     private String network;
     private String daemon;
@@ -48,7 +46,7 @@ public class TibrvConnector extends AbstractConnector
         return "tibrv";
     }
 
-    public void doStart() throws UMOException
+    public void doStart() throws MuleException
     {
         //noop
     }
@@ -58,48 +56,47 @@ public class TibrvConnector extends AbstractConnector
     }
 
     /** Connects to the rvd and initializes a transport */
-    public void doConnect() throws ConnectException
+    public void doConnect() throws Exception
     {
-        try{
-            if( transport == null )
+        if( transport == null )
+        {
+            Tibrv.open( Tibrv.IMPL_NATIVE );
+            if( logger.isInfoEnabled() )
             {
-                Tibrv.open( Tibrv.IMPL_NATIVE );
-                if( logger.isDebugEnabled() )
-                {
-                    logger.debug( "Service: " + service );
-                    logger.debug( "Network: " + network );
-                    logger.debug( "Daemon: " + daemon );
-                }
-                transport = new TibrvRvdTransport( service, network, daemon );
+                logger.info( "Service: " + service );
+                logger.info( "Network: " + network );
+                logger.info( "Daemon: " + daemon );
             }
-        }catch( Exception e ){
-            throw new ConnectException
-                ( CoreMessages.failedToCreate( "Tibrv Connector" ), e, this );
+            transport = new TibrvRvdTransport( service, network, daemon );
         }
     }
     
     /** Destroys transport and closes tibrv xs*/    
-    public void doDisconnect()
+    public void doDisconnect() throws Exception
     {
-        try{
-            if( transport != null )
-            {
-                transport.destroy();
-                transport = null;
-                Tibrv.close();
-            }
-        }catch( Exception e ){ logger.error( e, e ); }
+        if( transport != null )
+        {
+            transport.destroy();
+            transport = null;
+            Tibrv.close();
+        }
     }
 
 
-    protected void doStop() throws UMOException
+    protected void doStop() throws MuleException
     {
         // template method
     }
 
-    public void doDispose()
+    public void doDispose() 
     {
-        doDisconnect();
+        try
+        {
+            doDisconnect();
+        }catch( Exception e )
+        {
+            logger.error( e, e );
+        }
     }
 
     //mmmmm.... beans.......

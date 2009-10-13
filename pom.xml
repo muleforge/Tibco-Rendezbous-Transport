@@ -4,14 +4,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.mule.transports</groupId>
-    <version>1.0-SNAPSHOT</version>
+    <version>2.2.1</version>
     <properties>
-	<muleVersion>1.4.1</muleVersion>
+	<muleVersion>2.2.1</muleVersion>
     </properties>    
     <artifactId>mule-transport-tibcorv</artifactId>
     <packaging>jar</packaging>
     <name>Tibco Rendezvous Transport</name>
-    <description>Allows Mule to communicate with Tibco's Rendezvous message bus</description>
+    <description>Allows Mule 2.2.1 to communicate with Tibco's Rendezvous message bus</description>
 	<distributionManagement>
 		<repository>
 			<id>muleforge.webdav.releases</id>
@@ -49,33 +49,8 @@
 	</build>
     <dependencies>
 		<dependency>
-			<groupId>org.mule.transports</groupId>
-			<artifactId>mule-transport-vm</artifactId>
-			<version>${muleVersion}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.mule.transports</groupId>
-			<artifactId>mule-transport-tcp</artifactId>
-			<version>${muleVersion}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.mule.transports</groupId>
-			<artifactId>mule-transport-file</artifactId>
-			<version>${muleVersion}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.mule.transports</groupId>
-			<artifactId>mule-transport-stream</artifactId>
-			<version>${muleVersion}</version>
-		</dependency>
-		<dependency>
 			<groupId>org.mule.modules</groupId>
 			<artifactId>mule-module-client</artifactId>
-			<version>${muleVersion}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.mule.tests</groupId>
-			<artifactId>mule-tests-functional</artifactId>
 			<version>${muleVersion}</version>
 		</dependency>
         <dependency>

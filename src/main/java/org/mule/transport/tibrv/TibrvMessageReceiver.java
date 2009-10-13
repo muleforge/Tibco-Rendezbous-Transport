@@ -1,18 +1,30 @@
 // 	TibrvMessageReceiverReceiver.java
 
-// 	Ross Paul, ross.paul@mlb.com, 22 Jun 2006
-// 	Time-stamp: <2007-06-26 17:03:04 rpaul>
-package org.mule.providers.tibrv;
+// 	Ross Paul, rossapaul@gmail.com, 22 Jun 2006
+// 	Time-stamp: <2009-10-12 17:46:18 rpaul>
+package org.mule.transport.tibrv;
 
-import org.mule.providers.*;
-import org.mule.impl.MuleMessage;
-import org.mule.umo.provider.*;
-import org.mule.umo.*;
-import org.mule.umo.endpoint.UMOEndpoint;
-import org.mule.umo.lifecycle.*;
+
 import javax.resource.spi.work.Work;
 
 import com.tibco.tibrv.*;
+
+
+import org.mule.api.MuleException;
+import org.mule.api.transport.MessageAdapter;
+import org.mule.api.endpoint.InboundEndpoint;
+import org.mule.api.lifecycle.CreateException;
+import org.mule.api.lifecycle.LifecycleException;
+import org.mule.api.service.Service;
+import org.mule.api.transaction.Transaction;
+import org.mule.api.transaction.TransactionException;
+import org.mule.api.transport.Connector;
+import org.mule.transport.AbstractMessageReceiver;
+import org.mule.transport.AbstractReceiverWorker;
+import org.mule.transport.ConnectException;
+import org.mule.DefaultMuleMessage;
+
+
 
 /**
  * Receives regular and certified messages from rendezvous.  See TibrvConnector
@@ -31,11 +43,11 @@ public class TibrvMessageReceiver extends AbstractMessageReceiver
     
 
 
-    public TibrvMessageReceiver( UMOConnector connector, 
-                                 UMOComponent component, UMOEndpoint endpoint )
-        throws InitialisationException
+    public TibrvMessageReceiver( Connector connector, 
+                                 Service service, InboundEndpoint endpoint )
+        throws CreateException
     {
-        super(connector, component, endpoint);
+        super(connector, service, endpoint);
         logger.debug( "receiver created" );
     }
 
@@ -75,8 +87,8 @@ public class TibrvMessageReceiver extends AbstractMessageReceiver
         }
         else
         {
-        listener = new TibrvListener
-            ( Tibrv.defaultQueue(), this, transport, subject, null );
+            listener = new TibrvListener
+                ( Tibrv.defaultQueue(), this, transport, subject, null );
         }
     }
 
@@ -96,7 +108,7 @@ public class TibrvMessageReceiver extends AbstractMessageReceiver
     }
 
     /** stops dispatching messages */
-    protected void doStop() throws UMOException
+    protected void doStop( boolean force ) throws MuleException
     {
         try
         {
@@ -109,7 +121,7 @@ public class TibrvMessageReceiver extends AbstractMessageReceiver
     }
 
     /** starts a dispatcher on the default message queue */
-    protected void doStart() throws UMOException
+    protected void doStart() throws MuleException
     {
         try
         {
@@ -132,7 +144,7 @@ public class TibrvMessageReceiver extends AbstractMessageReceiver
                 logger.debug( msg );
             }
             
-            getWorkManager().startWork( new Worker( msg ));
+            getWorkManager().doWork( new Worker( msg ));
         }catch( Exception e ){ handleException( e );}
     }
 
@@ -160,9 +172,9 @@ public class TibrvMessageReceiver extends AbstractMessageReceiver
         {
             try
             {
-                UMOMessageAdapter adapter = 
+                MessageAdapter adapter = 
                     connector.getMessageAdapter( message );
-                routeMessage( new MuleMessage( adapter ));
+                routeMessage( new DefaultMuleMessage( adapter ));
             }
             catch( Exception e )
             {

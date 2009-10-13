@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns="http://www.mulesource.org/schema/mule/tibcorv/2.2"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:mule="http://www.mulesource.org/schema/mule/core/2.2"
+            xmlns:schemadoc="http://www.mulesource.org/schema/mule/schemadoc/2.2"
+            targetNamespace="http://www.mulesource.org/schema/mule/tibcorv/2.2"
+            elementFormDefault="qualified"
+            attributeFormDefault="unqualified">
+
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+    <xsd:import namespace="http://www.mulesource.org/schema/mule/core/2.2"
+                schemaLocation="http://www.mulesource.org/schema/mule/core/2.2/mule.xsd" />
+    <xsd:import namespace = "http://www.mulesource.org/schema/mule/schemadoc/2.2"
+                schemaLocation = "http://www.mulesource.org/schema/mule/schemadoc/2.2/mule-schemadoc.xsd"/>
+
+    <xsd:annotation>
+        <xsd:documentation>Sends and receives messages over tibco
+        rendezvous.  Supports certified messaging, distributed
+        queues, etc</xsd:documentation>
+        <xsd:appinfo>
+            <schemadoc:short-name>Tibrv</schemadoc:short-name>
+            <schemadoc:page-title>Tibrv Transport</schemadoc:page-title>
+            <schemadoc:transport-features
+            receiveEvents="true" dispatchEvents="true" responseEvents="true"
+                                          requestEvents="true"
+                                          transactions="false" streaming="false">
+                <schemadoc:inboundMEPs in-only="${receiver}" in-optional-out="true" in-out="true"/>
+                <schemadoc:outboundMEPs out-only="${dispatcher}" out-in="true" out-optional-in="true"/>
+            </schemadoc:transport-features>
+        </xsd:appinfo>
+    </xsd:annotation>
+
+    <xsd:element name="connector" type="tibrvConnectorType" substitutionGroup="mule:abstract-connector">
+        <xsd:annotation>
+            <xsd:documentation>
+                Manages the connection to the rvd
+            </xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+
+    <xsd:complexType name="tibrvConnectorType">
+        <xsd:complexContent>
+            <xsd:extension base="mule:connectorType">
+              <xsd:attribute name="service" type="xsd:string">
+                <xsd:annotation>
+                  <xsd:documentation>
+                    rvd service param
+                  </xsd:documentation>
+                </xsd:annotation>
+              </xsd:attribute>
+              <xsd:attribute name="network" type="xsd:string">
+                <xsd:annotation>
+                  <xsd:documentation>
+                    rvd network param
+                  </xsd:documentation>
+                </xsd:annotation>
+              </xsd:attribute>
+              <xsd:attribute name="daemon" type="xsd:string">
+                <xsd:annotation>
+                  <xsd:documentation>
+                    rvd daemon param
+                  </xsd:documentation>
+                </xsd:annotation>
+              </xsd:attribute>
+              <xsd:attributeGroup ref="jmsConnectorAttributes"/>
+            </xsd:extension>             
+        </xsd:complexContent>
+    </xsd:complexType>
+
+
+    <xsd:attributeGroup name="distributedQueueAttributes">
+      <xsd:attribute name="defaultWorkerWeight" type="mule:substitutableInt">
+        <xsd:annotation>
+          <xsd:documentation>
+            worker weight in a distributed queue (default = 1)
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:attribute>
+      <xsd:attribute name="defaultWorkerTasks" type="mule:substitutableInt">
+        <xsd:annotation>
+          <xsd:documentation>
+            worker tasks in a distributed queue (default = 1)
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:attribute>
+      <xsd:attribute name="defaultSchedulerWeight" type="mule:substitutableInt">
+        <xsd:annotation>
+          <xsd:documentation>
+            scheduler weight in a distributed queue (default = 1)
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:attribute>
+      <xsd:attribute name="defaultSchedulerHeartbeat" 
+                     type="mule:substitutableDouble">
+        <xsd:annotation>
+          <xsd:documentation>
+            scheduler heartbeat frequency in a distributed queue 
+            (default = 1.0 seconds)
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:attribute>
+      <xsd:attribute name="defaultSchedulerActivation" 
+                     type="mule:substitutableDouble">
+        <xsd:annotation>
+          <xsd:documentation>
+            scheduler activation time in a distributed queue 
+            (default = 3.5 seconds)
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:attribute>
+    </xsd:attributeGroup>
+
+
+
+
+
+
+
+
+    <!--
+    The following define endpoint elements for this transport. Attributes for the endpoint can be defined at the section
+    at the bottom
+    -->
+    <xsd:element name="inbound-endpoint" type="inboundEndpointType" substitutionGroup="mule:abstract-inbound-endpoint"/>
+    <xsd:complexType name="inboundEndpointType">
+        <xsd:complexContent>
+            <xsd:extension base="mule:inboundEndpointType">
+                <xsd:attributeGroup ref="addressAttributes"/>
+                <xsd:attributeGroup ref="propertyAttributes"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:element name="outbound-endpoint" type="outboundEndpointType" substitutionGroup="mule:abstract-outbound-endpoint"/>
+    <xsd:complexType name="outboundEndpointType">
+        <xsd:complexContent>
+            <xsd:extension base="mule:outboundEndpointType">
+                <xsd:attributeGroup ref="addressAttributes"/>
+                <xsd:attributeGroup ref="propertyAttributes"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:element name="endpoint" type="globalEndpointType" substitutionGroup="mule:abstract-global-endpoint"/>
+    <xsd:complexType name="globalEndpointType">
+        <xsd:complexContent>
+            <xsd:extension base="mule:globalEndpointType">
+                <xsd:attributeGroup ref="addressAttributes"/>
+                <xsd:attributeGroup ref="propertyAttributes"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:attributeGroup name="addressAttributes">
+      <xsd:attribute name="subject" type="xsd:string">
+      <xsd:attribute name="cmname" type="xsd:string">
+    </xsd:attributeGroup>
+
+    <xsd:attributeGroup name="propertyAttributes">
+    </xsd:attributeGroup>
+
+    <xsd:element name="tibrvmsg-to-map-transformer" type="mule:abstractTransformerType" substitutionGroup="mule:abstract-transformer">
+        <xsd:annotation>
+            <xsd:documentation>
+              from tibrvMsg into a Map.  Brilliant!
+            </xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="object-to-tibrvmsg" type="mule:abstractTransformerType" substitutionGroup="mule:abstract-transformer">
+        <xsd:annotation>
+            <xsd:documentation>
+              Converts an object into a tibrvMsg... Smashing
+            </xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+</xsd:schema>
