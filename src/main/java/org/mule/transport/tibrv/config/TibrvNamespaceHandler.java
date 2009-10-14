@@ -26,7 +26,7 @@ public class TibrvNamespaceHandler extends AbstractMuleNamespaceHandler
 {
     public void init()
     {
-        registerStandardTransportEndpoints( TibrvConnector.TIBRV, 
+        registerStandardTransportEndpoints( TibrvConnector.TIBCORV, 
                                             URIBuilder.PATH_ATTRIBUTES);
 
         registerConnectorDefinitionParser(TibrvConnector.class);

@@ -1,7 +1,7 @@
 // 	TibrvConnector.java
 
 // 	Ross Paul, rossapaul@gmail.com, 21 Jun 2006
-// 	Time-stamp: <2009-10-13 12:13:16 rpaul>
+// 	Time-stamp: <2009-10-13 17:51:27 rpaul>
 package org.mule.transport.tibrv;
 
 import com.tibco.tibrv.*;
@@ -22,7 +22,7 @@ import org.mule.transport.AbstractConnector;
  */
 public class TibrvConnector extends AbstractConnector
 {
-    public static final String TIBRV = "tibrv";
+    public static final String TIBCORV = "tibcorv";
     public static final String CONTENT_FIELD = "content";
 
     //tibco connection params
@@ -40,10 +40,10 @@ public class TibrvConnector extends AbstractConnector
     TibrvTransport transport = null;
 
 
-    /** @return "tibrv" */
+    /** @return "tibcorv" */
     public String getProtocol()
     {
-        return "tibrv";
+        return TIBCORV;
     }
 
     public void doStart() throws MuleException

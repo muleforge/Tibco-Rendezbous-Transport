@@ -63,7 +63,7 @@
                   </xsd:documentation>
                 </xsd:annotation>
               </xsd:attribute>
-              <xsd:attributeGroup ref="jmsConnectorAttributes"/>
+              <xsd:attributeGroup ref="distributedQueueAttributes"/>
             </xsd:extension>             
         </xsd:complexContent>
     </xsd:complexType>
@@ -91,8 +91,9 @@
           </xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
+      <!--todo... why isn't there a mule:substitutableDouble -->
       <xsd:attribute name="defaultSchedulerHeartbeat" 
-                     type="mule:substitutableDouble">
+                     type="xsd:string">
         <xsd:annotation>
           <xsd:documentation>
             scheduler heartbeat frequency in a distributed queue 
@@ -101,7 +102,7 @@
         </xsd:annotation>
       </xsd:attribute>
       <xsd:attribute name="defaultSchedulerActivation" 
-                     type="mule:substitutableDouble">
+                     type="xsd:string">
         <xsd:annotation>
           <xsd:documentation>
             scheduler activation time in a distributed queue 
@@ -153,8 +154,8 @@
     </xsd:complexType>
 
     <xsd:attributeGroup name="addressAttributes">
-      <xsd:attribute name="subject" type="xsd:string">
-      <xsd:attribute name="cmname" type="xsd:string">
+      <xsd:attribute name="subject" type="xsd:string"/>
+      <xsd:attribute name="cmname" type="xsd:string"/>
     </xsd:attributeGroup>
 
     <xsd:attributeGroup name="propertyAttributes">
@@ -167,7 +168,7 @@
             </xsd:documentation>
         </xsd:annotation>
     </xsd:element>
-    <xsd:element name="object-to-tibrvmsg" type="mule:abstractTransformerType" substitutionGroup="mule:abstract-transformer">
+    <xsd:element name="object-to-tibrvmsg-transformer" type="mule:abstractTransformerType" substitutionGroup="mule:abstract-transformer">
         <xsd:annotation>
             <xsd:documentation>
               Converts an object into a tibrvMsg... Smashing
