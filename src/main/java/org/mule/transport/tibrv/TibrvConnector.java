@@ -1,7 +1,7 @@
 // 	TibrvConnector.java
 
 // 	Ross Paul, rossapaul@gmail.com, 21 Jun 2006
-// 	Time-stamp: <2009-10-13 17:51:27 rpaul>
+// 	Time-stamp: <2009-10-16 11:47:20 rpaul>
 package org.mule.transport.tibrv;
 
 import com.tibco.tibrv.*;
@@ -15,7 +15,12 @@ import org.mule.transport.AbstractConnector;
 
 
 /**
- * Allows mule to communicate over rendevoooooos!  Now mule 2.2.1 friendly
+ * Allows mule to communicate over rendevoooooos!  Now mule 2.2.1 friendly.
+ * Endpoing should be specified with a subject and optionally a cmname.  When
+ * cmname is present, the Dispatcher will send certified, and the receiver will
+ * both recieve certified and register itself as part of a distributed queue.
+ * Subjects support wildcards and mule expressions. Remember, when using the 
+ * wildcard, ">", make sure you uri encode it to %3E
  *
  * @author <a href="mailto:rossapaul@gmail.com">Ross Paul</a>
  * @version $Revision: 3 $

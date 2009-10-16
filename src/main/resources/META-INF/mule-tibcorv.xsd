@@ -128,7 +128,7 @@
         <xsd:complexContent>
             <xsd:extension base="mule:inboundEndpointType">
                 <xsd:attributeGroup ref="addressAttributes"/>
-                <xsd:attributeGroup ref="propertyAttributes"/>
+                <!--xsd:attributeGroup ref="propertyAttributes"/-->
             </xsd:extension>
         </xsd:complexContent>
     </xsd:complexType>
@@ -138,7 +138,7 @@
         <xsd:complexContent>
             <xsd:extension base="mule:outboundEndpointType">
                 <xsd:attributeGroup ref="addressAttributes"/>
-                <xsd:attributeGroup ref="propertyAttributes"/>
+                <!--xsd:attributeGroup ref="propertyAttributes"/-->
             </xsd:extension>
         </xsd:complexContent>
     </xsd:complexType>
@@ -148,7 +148,7 @@
         <xsd:complexContent>
             <xsd:extension base="mule:globalEndpointType">
                 <xsd:attributeGroup ref="addressAttributes"/>
-                <xsd:attributeGroup ref="propertyAttributes"/>
+                <!--xsd:attributeGroup ref="propertyAttributes"/-->
             </xsd:extension>
         </xsd:complexContent>
     </xsd:complexType>

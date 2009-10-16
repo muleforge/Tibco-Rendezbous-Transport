@@ -11,6 +11,7 @@ package org.mule.transport.tibrv.config;
 
 import org.mule.config.spring.handlers.AbstractMuleNamespaceHandler;
 import org.mule.config.spring.parsers.specific.TransformerDefinitionParser;
+import org.mule.config.spring.parsers.assembly.configuration.PrefixValueMap;
 import org.mule.endpoint.URIBuilder;
 
 import org.springframework.beans.factory.xml.NamespaceHandlerSupport;
@@ -27,7 +28,8 @@ public class TibrvNamespaceHandler extends AbstractMuleNamespaceHandler
     public void init()
     {
         registerStandardTransportEndpoints( TibrvConnector.TIBCORV, 
-                                            URIBuilder.PATH_ATTRIBUTES);
+                                            new String[]{"subject"})
+            .addAlias( "subject", URIBuilder.PATH );
 
         registerConnectorDefinitionParser(TibrvConnector.class);
 

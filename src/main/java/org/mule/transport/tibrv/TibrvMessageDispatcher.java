@@ -1,7 +1,7 @@
 // 	TibrvMessageDispatcher.java
 
 // 	Ross Paul, rossapaul@gmail.com, 22 Jun 2006
-// 	Time-stamp: <2009-10-12 17:43:35 rpaul>
+// 	Time-stamp: <2009-10-16 11:06:10 rpaul>
 package org.mule.transport.tibrv;
 
 import com.tibco.tibrv.*;
@@ -16,7 +16,7 @@ import org.mule.api.expression.*;
 /**
  * Used for sending out transformed umo output over rendezvous.  By convention,
  * non map outputs will be keyed with TibrvConnector.CONTENT_FIELD (content).  
- * See TibrvConnector for info on how to use certified messaging, 
+ * See TibrvConnector for info on how to use certified messaging 
  *
  * @author <a href="mailto:rossapaul@gmail.com">Ross Paul</a>
  * @author Ross Paul
@@ -41,9 +41,8 @@ public class TibrvMessageDispatcher extends AbstractMessageDispatcher
             event.getMuleContext().getExpressionManager();
         //what we're sending and where to
         Object message = event.transformMessage();
-        String subject = event.getEndpoint().getEndpointURI().getAddress();
-        String cmname = event.getEndpoint().getEndpointURI().getParams()
-            .getProperty( "cmname" );
+        String subject = event.getEndpoint().getEndpointURI().getAuthority();
+        String cmname = (String)endpoint.getProperty( "cmname" );
         
         subject = expressionManager.parse( subject, event.getMessage() );
         

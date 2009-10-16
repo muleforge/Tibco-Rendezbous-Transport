@@ -1,7 +1,7 @@
 // 	TibrvMessageReceiverReceiver.java
 
 // 	Ross Paul, rossapaul@gmail.com, 22 Jun 2006
-// 	Time-stamp: <2009-10-12 17:46:18 rpaul>
+// 	Time-stamp: <2009-10-16 11:05:29 rpaul>
 package org.mule.transport.tibrv;
 
 
@@ -55,9 +55,9 @@ public class TibrvMessageReceiver extends AbstractMessageReceiver
     public void doConnect() throws Exception
     {
         TibrvTransport transport = ((TibrvConnector)connector).transport;
-        String subject = endpoint.getEndpointURI().getAddress();
-        String cmname = endpoint.getEndpointURI().getParams().getProperty
-            ( "cmname" );
+
+        String subject = endpoint.getEndpointURI().getAuthority();
+        String cmname = (String)endpoint.getProperty( "cmname" );
 
         logger.info( "Connecting on subject: " + subject );
         if( cmname != null )
