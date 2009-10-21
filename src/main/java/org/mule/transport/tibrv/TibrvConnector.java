@@ -1,7 +1,7 @@
 // 	TibrvConnector.java
 
 // 	Ross Paul, rossapaul@gmail.com, 21 Jun 2006
-// 	Time-stamp: <2009-10-16 11:47:20 rpaul>
+// 	Time-stamp: <2009-10-21 11:41:32 rpaul>
 package org.mule.transport.tibrv;
 
 import com.tibco.tibrv.*;
@@ -29,6 +29,9 @@ public class TibrvConnector extends AbstractConnector
 {
     public static final String TIBCORV = "tibcorv";
     public static final String CONTENT_FIELD = "content";
+
+    public static final String SEND_SUBJECT = "__send__subject__";
+    public static final String REPLY_SUBJECT = "__reply__subject__";
 
     //tibco connection params
     private String service;

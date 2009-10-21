@@ -1,13 +1,14 @@
 // 	TibrvMessageToMap.java
 
 // 	Ross Paul, rossapaul@gmail.com, 12 Jul 2006
-// 	Time-stamp: <2009-10-12 17:47:56 rpaul>
+// 	Time-stamp: <2009-10-21 11:42:56 rpaul>
 package org.mule.transport.tibrv.transformer;
 
 import com.tibco.tibrv.*;
 import java.util.*;
 import java.io.*;
 
+import org.mule.transport.tibrv.TibrvConnector;
 import org.mule.transformer.AbstractMessageAwareTransformer;
 import org.mule.api.transformer.TransformerException;
 import org.mule.api.MuleMessage;
@@ -64,6 +65,16 @@ public class TibrvMsgToMap extends AbstractMessageAwareTransformer
             }
             map.put( field.name, data );
         }
+
+        String subject = msg.getSendSubject();
+        if( subject != null )
+            map.put( TibrvConnector.SEND_SUBJECT, msg.getSendSubject() );
+
+        subject = msg.getReplySubject();
+        if( subject != null )
+            map.put( TibrvConnector.REPLY_SUBJECT, msg.getReplySubject() );
+
+
         return map;
     }
 
