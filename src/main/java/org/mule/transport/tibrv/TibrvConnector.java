@@ -1,7 +1,7 @@
 // 	TibrvConnector.java
 
 // 	Ross Paul, rossapaul@gmail.com, 21 Jun 2006
-// 	Time-stamp: <2009-10-21 11:41:32 rpaul>
+// 	Time-stamp: <2009-10-27 11:13:10 rpaul>
 package org.mule.transport.tibrv;
 
 import com.tibco.tibrv.*;
@@ -187,4 +187,12 @@ public class TibrvConnector extends AbstractConnector
     {
         this.defaultSchedulerActivation = defaultSchedulerActivation;
     }
+
+    protected Object getReceiverKey(Service service, InboundEndpoint endpoint)
+    {
+        return service.getName() + "~tibrv://" + 
+            endpoint.getEndpointURI().getAuthority() + "&cmname=" + 
+            endpoint.getProperty( "cmname" );
+    }
+
 }
