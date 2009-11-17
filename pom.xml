@@ -11,10 +11,9 @@
     <name>Tibco Rendezvous Transport</name>
     <description>Allows Mule 2.2.1 to communicate with Tibco's Rendezvous message bus</description>
 	<scm>
-		<connection>scm:svn:http://svn.muleforge.org/${domainName}/tags/mule-transport-tibcorv-2.2.1</connection>
-		<developerConnection>scm:svn:https://svn.muleforge.org/${domainName}/tags/mule-transport-tibcorv-2.2.1</developerConnection>
-		<tag>HEAD</tag>
-		<url>http://svn.${domainName}.muleforge.org/tags/mule-transport-tibcorv-2.2.1</url>
+		<connection>scm:svn:http://svn.muleforge.org/mule-transport-tibcorv-2.2.1/trunk</connection>
+		<developerConnection>scm:svn:https://svn.muleforge.org/mule-transport-tibcorv-2.2.1/trunk</developerConnection>
+		<url>http://svn.muleforge.org/mule-transport-tibcorv-2.2.1/trunk</url>
 	</scm>
 	<distributionManagement>
 		<repository>
