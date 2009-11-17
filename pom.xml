@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.mule.transports</groupId>
-    <version>2.2.1-SNAPSHOT</version>
+    <version>2.2.1</version>
     <properties>
 	<muleVersion>2.2.1</muleVersion>
     </properties>    
@@ -13,10 +11,10 @@
     <name>Tibco Rendezvous Transport</name>
     <description>Allows Mule 2.2.1 to communicate with Tibco's Rendezvous message bus</description>
 	<scm>
-		<connection>scm:svn:http://svn.muleforge.org/${domainName}/</connection>
-		<developerConnection>scm:svn:https://svn.muleforge.org/${domainName}/</developerConnection>
+		<connection>scm:svn:http://svn.muleforge.org/${domainName}/tags/mule-transport-tibcorv-2.2.1</connection>
+		<developerConnection>scm:svn:https://svn.muleforge.org/${domainName}/tags/mule-transport-tibcorv-2.2.1</developerConnection>
 		<tag>HEAD</tag>
-		<url>http://svn.${domainName}.muleforge.org/</url>
+		<url>http://svn.${domainName}.muleforge.org/tags/mule-transport-tibcorv-2.2.1</url>
 	</scm>
 	<distributionManagement>
 		<repository>
