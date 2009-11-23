@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.mule.transports</groupId>
-    <version>2.2.1</version>
+    <version>2.2.1.1-SNAPSHOT</version>
     <properties>
 	<muleVersion>2.2.1</muleVersion>
     </properties>    
@@ -11,9 +11,9 @@
     <name>Tibco Rendezvous Transport</name>
     <description>Allows Mule 2.2.1 to communicate with Tibco's Rendezvous message bus</description>
     <scm>
-      <connection>scm:svn:http://svn.muleforge.org/mule-transport-tibcorv/tags/mule-transport-tibcorv-2.2.1</connection>
-      <developerConnection>scm:svn:https://svn.muleforge.org/mule-transport-tibcorv/tags/mule-transport-tibcorv-2.2.1</developerConnection>
-      <url>http://svn.muleforge.org/mule-transport-tibcorv/tags/mule-transport-tibcorv-2.2.1</url>
+      <connection>scm:svn:http://svn.muleforge.org/mule-transport-tibcorv/</connection>
+      <developerConnection>scm:svn:https://svn.muleforge.org/mule-transport-tibcorv/</developerConnection>
+      <url>http://svn.muleforge.org/mule-transport-tibcorv/</url>
     </scm> 
 
     
